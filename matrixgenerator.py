@@ -4,62 +4,62 @@ import re
 
 
 def openfile_and_replace(filename):
-    fh = open(filename, "r+")
-    str = fh.read()
-    str = str.replace(".", " ")
-    str = str.replace(",", " ")
-    str = str.replace("\n", " ")
-    str = str.replace("&comma", " ")
-    str = str.replace(";", " ")
-    str = str.replace(":", " ")
-    str = str.replace("!", " ")
-    re.sub(' +', ' ', str)
-    fh.close()
-    return str
+	fh = open(filename, "r+")
+	str = fh.read()
+	str=str.replace("."," ")
+	str=str.replace(","," ")
+	str=str.replace("\n"," ")
+	str=str.replace("&comma"," ")
+	#str=str.replace(";"," ")
+	#str=str.replace(":"," ")
+	#str=str.replace("!"," ")
+	#str=str.replace("?",".")
+	re.sub(' +',' ',str)
+	fh.close()
+	return str
 
 
 def openfile_and_split(filename):
-    fh = open(filename, "r+")
-    str = fh.read()
-    str = str.replace(",", " ")
-    str = str.replace("\n", " ")
-    str = str.replace("&comma", " ")
-    str = str.replace(";", " ")
-    str = str.replace(":", " ")
-    str = str.replace("!", " ")
-    re.sub(' +', ' ', str)
-    str = str.split('.')
-    fh.close()
-    return str
-
+	fh = open(filename, "r+")
+	str = fh.read()
+	str=str.replace(","," ")
+	str=str.replace("\n"," ")
+	str=str.replace("&comma"," ")
+	#str=str.replace(";"," ")
+	#str=str.replace(":"," ")
+	#str=str.replace("!"," ")
+	#str=str.replace("?",".")
+	re.sub(' +',' ',str)
+	str=str.split('.')
+	fh.close()
+	return str
 
 def getwordbins(words):
-    cnt = Counter()
-    for word in words:
-        cnt[word] += 1
-    return cnt
+	cnt = Counter()
+	for word in words:
+		cnt[word] += 1
+	return cnt
+
 
 
 def main(filename):
-    txt = openfile_and_replace(filename)
-    array = list()
-    sentenceuniquearray = list()
-#txt = removegarbage(txt)
-    txt = txt.replace(","," ")
-    txt = txt.replace("\n"," ")
-    txt = txt.replace("&comma"," ")
-    txt = txt.replace("?"," ")
-    words = txt.split(' ')
-    bins = getwordbins(words)
-    for key, value in bins.most_common():
-        if value > 0:
-            if key != '':
-                array.append(key)
+	txt = openfile_and_replace(filename)
+	array=list()
+	sentenceuniquearray=list()
+	txt=txt.replace(","," ")
+	txt=txt.replace("\n"," ")
+	txt=txt.replace("&comma"," ")
+	txt=txt.replace("?",".")
+	words = txt.split(' ')
+	bins = getwordbins(words)
+	for key, value in bins.most_common():
+		if value > 0:
+			if key != '':
+				array.append(key)
 	#array contains a list of unique words
 	lenny=len(array)
 	#x contains the matrix of unique words X unique words
 	x=zeros((lenny, lenny), int)
-	
 	#reading file line by line and then doing the matrix operation
 	l=list()
 	with open('saminput.txt') as f:
@@ -73,7 +73,7 @@ def main(filename):
 				None
 			elif z=='.' or z == '?':
 				#in each iteration, ""sentence"" gets overwritten by a new sentence's value
-				sentence = ''.join(l) 										
+				sentence = ''.join(l)										
 				
 				#strip deletes all the trailing and leading white spaces
 				sentence=sentence.strip(" ")
@@ -113,7 +113,10 @@ def main(filename):
 				l=list()
 			else:
 				l.append(z)	
+
 	print x	
 	f.close()
 	
+#	print x
+
 main('saminput.txt')
