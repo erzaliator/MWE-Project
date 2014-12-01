@@ -34,4 +34,4 @@ def main(filename):
 			if key != '':
 				print key,value
 
-main('input.txt')
+main('input_matrixgenerator.txt')

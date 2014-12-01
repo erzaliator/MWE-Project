@@ -62,7 +62,7 @@ def main(filename):
 	x=zeros((lenny, lenny), int)
 	#reading file line by line and then doing the matrix operation
 	l=list()
-	with open('input_matrixgenertor.py') as f:
+	with open('input_matrixgenerator.txt') as f:
 		while True:
 			z=f.read(1)
 			if not z:
@@ -111,4 +111,4 @@ def main(filename):
 	f.close()
 
 
-main('input_matrixgenertor.py')
+main('input_matrixgenerator.txt')

@@ -1,8 +1,10 @@
 from collections import Counter
 from numpy import *
 import re
-
-
+import numpy
+from tempfile import mkdtemp
+import os.path as path
+hello = path.join("./", 'xmas.dat')
 def openfile_and_replace(filename):
 	fh = open(filename, "r+")
 	str = fh.read()
@@ -59,10 +61,12 @@ def main(filename):
 	#array contains a list of unique words
 	lenny=len(array)
 	#x contains the matrix of unique words X unique words
-	x=zeros((lenny, lenny), int)
-	#reading file line by line and then doing the matrix operation
+#	x=zeros((lenny, lenny), int)
+	x=numpy.memmap(hello, dtype='int', mode='w+', shape=(lenny, lenny))
+#	print x
+#reading file line by line and then doing the matrix operation
 	l=list()
-	with open('saminput.txt') as f:
+	with open('input_matrixgenerator.txt') as f:
 		while True:
 			z=f.read(1)
 			if not z:
@@ -83,7 +87,7 @@ def main(filename):
 				counter = getwordbins(sentence)
 				for key, value in counter.most_common():
 					if value > 0:
-						if key != '':
+						if key != '' or key!= '&comma':
 							sentenceuniquearray.append(key)
 				for wordsofsentence in sentenceuniquearray:
 					freq=counter[wordsofsentence]
@@ -114,9 +118,7 @@ def main(filename):
 			else:
 				l.append(z)	
 
-	print x	
 	f.close()
-	
-#	print x
+	print x
 
-main('saminput.txt')
+main('input_matrixgenerator.txt')
